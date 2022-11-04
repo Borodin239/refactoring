@@ -7,5 +7,9 @@
 /dataSources/
 /dataSources.local.xml
 
-#Idea
+# Idea
 /.idea
+/target
+
+#Project DB
+test.db
