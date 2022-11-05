@@ -1,12 +1,13 @@
 package ru.akirakozov.sd.refactoring.servlet;
 
+import lombok.val;
+import ru.akirakozov.sd.refactoring.data.Product;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+
+import static ru.akirakozov.sd.refactoring.data.ProductDB.getAll;
 
 /**
  * @author akirakozov
@@ -15,25 +16,13 @@ public class GetProductsServlet extends AbstractServlet {
 
     @Override
     protected void doRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        try {
-            try (Connection c = DriverManager.getConnection("jdbc:sqlite:test.db")) {
-                Statement stmt = c.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCT");
-                response.getWriter().println("<html><body>");
+        response.getWriter().println("<html><body>");
 
-                while (rs.next()) {
-                    String  name = rs.getString("name");
-                    int price  = rs.getInt("price");
-                    response.getWriter().println(name + "\t" + price + "</br>");
-                }
-                response.getWriter().println("</body></html>");
+        val res = getAll();
 
-                rs.close();
-                stmt.close();
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        for (Product product: res) {
+            response.getWriter().println(product.getName() + "\t" + product.getPrice() + "</br>");
         }
+        response.getWriter().println("</body></html>");
     }
 }

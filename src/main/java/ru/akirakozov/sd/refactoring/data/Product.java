@@ -1,4 +1,4 @@
-package ru.akirakozov.sd.refactoring;
+package ru.akirakozov.sd.refactoring.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 import ru.akirakozov.sd.refactoring.CommonServletTest;
-import ru.akirakozov.sd.refactoring.Product;
+import ru.akirakozov.sd.refactoring.data.Product;
 
 import java.io.IOException;
 import java.io.PrintWriter;
